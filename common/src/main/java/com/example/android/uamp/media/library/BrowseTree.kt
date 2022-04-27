@@ -93,9 +93,17 @@ class BrowseTree(
                     context.resources.getResourceEntryName(R.drawable.ic_album)
             flag = MediaBrowserCompat.MediaItem.FLAG_BROWSABLE
         }.build()
+        val irsensTaleRoot = MediaMetadataCompat.Builder().apply {
+            id = "Irsen%27s+Tale"
+            title = "Irsen%27s+Tale"
+            albumArtUri = RESOURCE_ROOT_URI +
+                    context.resources.getResourceEntryName(R.drawable.ic_album)
+            flag = MediaBrowserCompat.MediaItem.FLAG_BROWSABLE
+        }.build()
 
-        rootList += recommendedMetadata
-        rootList += albumsMetadata
+//        rootList += recommendedMetadata
+//        rootList += albumsMetadata
+        rootList += irsensTaleRoot
         mediaIdToChildren[UAMP_BROWSABLE_ROOT] = rootList
 
         musicSource.forEach { mediaItem ->

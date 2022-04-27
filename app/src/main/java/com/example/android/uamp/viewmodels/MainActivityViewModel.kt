@@ -33,6 +33,7 @@ import com.example.android.uamp.media.extensions.id
 import com.example.android.uamp.media.extensions.isPlayEnabled
 import com.example.android.uamp.media.extensions.isPlaying
 import com.example.android.uamp.media.extensions.isPrepared
+import com.example.android.uamp.media.extensions.ld
 import com.example.android.uamp.utils.Event
 
 /**
@@ -113,6 +114,7 @@ class MainActivityViewModel(
      *   then pause playback, otherwise send "play" to resume playback.
      */
     fun playMedia(mediaItem: MediaItemData, pauseAllowed: Boolean = true) {
+        ld("Playing media id: ${mediaItem.mediaId}")
         val nowPlaying = musicServiceConnection.nowPlaying.value
         val transportControls = musicServiceConnection.transportControls
 

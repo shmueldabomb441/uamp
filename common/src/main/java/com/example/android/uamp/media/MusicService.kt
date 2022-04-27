@@ -205,7 +205,7 @@ open class MusicService : MediaBrowserServiceCompat() {
 
         // The media library is built from a remote JSON file. We'll create the source here,
         // and then use a suspend function to perform the download off the main thread.
-        mediaSource = JsonSource(source = remoteJsonSource)
+        mediaSource = JsonSource(source = remoteJsonSource) //TODO replace this with the global queue, and whenever the user wants to play a shiur or playlist, just add it to that queue
         serviceScope.launch {
             mediaSource.load()
         }
@@ -243,7 +243,7 @@ open class MusicService : MediaBrowserServiceCompat() {
          * The service will then remove itself as a foreground service, and will call
          * [stopSelf].
          */
-        currentPlayer.stop(/* reset= */true)
+        currentPlayer.stop(/* reset= */true)//TODO this is a deprecated method. Suggest to use stop() (and clearMediaItems() if applicable, though: I am not sure _exactly_ what clearMediaItems() does, but I think it clears the queue, and don't think the user wants that).
     }
 
     override fun onDestroy() {

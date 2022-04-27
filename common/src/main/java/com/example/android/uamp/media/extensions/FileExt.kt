@@ -18,6 +18,7 @@ package com.example.android.uamp.media.extensions
 
 import android.content.ContentResolver
 import android.net.Uri
+import android.util.Log
 import java.io.File
 
 /**
@@ -34,5 +35,7 @@ fun File.asAlbumArtContentUri(): Uri {
         .appendPath(this.path)
         .build()
 }
+
+fun ld(string: String) = Log.d("UAMP", string)
 
 private const val AUTHORITY = "com.example.android.uamp"

@@ -18,13 +18,13 @@ package com.example.android.uamp
 
 import android.media.AudioManager
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.android.uamp.fragments.MediaItemFragment
 import com.example.android.uamp.media.MusicService
+import com.example.android.uamp.media.extensions.ld
 import com.example.android.uamp.utils.Event
 import com.example.android.uamp.utils.InjectorUtils
 import com.example.android.uamp.viewmodels.MainActivityViewModel
@@ -65,28 +65,19 @@ class MainActivity : AppCompatActivity() {
                 transaction.commit()
             }
         })
+        val fragment = MediaItemFragment.newInstance("Irsen%27s+Tale")
 
-        val fragment = MediaItemFragment.newInstance(mediaId)
+        // If this is not the top level media (root), we add it to the fragment
 
-            // If this is not the top level media (root), we add it to the fragment
+        // back stack, so that actionbar toggle and Back will work appropriately:
+//        viewModel.showFragment(fragment, !isRootId("Irsen%27s+Tale"), "Irsen%27s+Tale")
+//        if (fragmentRequest.backStack) transaction.addToBackStack(null)
 
-            // back stack, so that actionbar toggle and Back will work appropriately:
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainer, fragment)
+        transaction.commit()
 
-            viewModel.showFragment(fragment, !isRootId(mediaId), mediaId)
-val transaction = supportFragmentManager.beginTransaction()
 
-                transaction.replace(
-
-                    R.id.fragmentContainer, fragment
-
-                )
-
-                if (fragmentRequest.backStack) transaction.addToBackStack(null)
-
-                transaction.commit()
-
-           
-      
         /**
          * Observe changes to the [MainActivityViewModel.rootMediaId]. When the app starts,
          * and the UI connects to [MusicService], this will be updated and the app will show
@@ -103,6 +94,7 @@ val transaction = supportFragmentManager.beginTransaction()
          */
         viewModel.navigateToMediaItem.observe(this, Observer {
             it?.getContentIfNotHandled()?.let { mediaId ->
+                ld("Navigating to meadID: $mediaId")
                 navigateToMediaItem(mediaId)
             }
         })

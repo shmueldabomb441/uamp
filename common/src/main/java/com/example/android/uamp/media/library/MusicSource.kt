@@ -86,6 +86,19 @@ const val STATE_ERROR = 4
 
 /**
  * Base class for music sources in UAMP.
+ *
+ * I think this represents a list of songs to play, which are provided like so:
+ * ```
+ * fun Playlist : AbstractMusicSource() {
+ *
+ *      private val music: List<MediaMetadataCompat>
+ *
+ *      override fun iterator() = music.iterator()
+ *
+ *      ...
+ *
+ * }
+ * ```
  */
 abstract class AbstractMusicSource : MusicSource {
     @State
