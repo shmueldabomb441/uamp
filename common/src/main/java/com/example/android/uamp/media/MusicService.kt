@@ -136,7 +136,7 @@ open class MusicService : MediaBrowserServiceCompat() {
      * See [Player.AudioComponent.setAudioAttributes] for details.
      */
     private val exoPlayer: ExoPlayer by lazy {
-        SimpleExoPlayer.Builder(this).build().apply {
+        SimpleExoPlayer.Builder(this).build().apply { //TODO replace with ExoPlayer.Builder (will all functionality be the same?? Make sure to test) - see https://stackoverflow.com/questions/70191652/simpleexoplayer-is-deprecated-in-2-16-version-of-exoplayer-what-to-use-now
             setAudioAttributes(uAmpAudioAttributes, true)
             setHandleAudioBecomingNoisy(true)
             addListener(playerListener)
